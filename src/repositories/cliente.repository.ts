@@ -1,5 +1,5 @@
-import {inject, Getter} from '@loopback/core';
-import {DefaultCrudRepository, repository, HasOneRepositoryFactory} from '@loopback/repository';
+import {Getter, inject} from '@loopback/core';
+import {DefaultCrudRepository, HasOneRepositoryFactory, repository} from '@loopback/repository';
 import {MysqlDataSource} from '../datasources';
 import {Cliente, ClienteRelations, UsuarioCliente, DireccionCliente} from '../models';
 import {UsuarioClienteRepository} from './usuario-cliente.repository';
@@ -16,8 +16,7 @@ export class ClienteRepository extends DefaultCrudRepository<
   public readonly direccionCliente: HasOneRepositoryFactory<DireccionCliente, typeof Cliente.prototype.id>;
 
   constructor(
-    @inject('datasources.mysql') dataSource: MysqlDataSource, @repository.getter('UsuarioClienteRepository') protected usuarioClienteRepositoryGetter: Getter<UsuarioClienteRepository>, @repository.getter('DireccionClienteRepository') protected direccionClienteRepositoryGetter: Getter<DireccionClienteRepository>,
-  ) {
+    @inject('datasources.mysql') dataSource: MysqlDataSource, @repository.getter('UsuarioClienteRepository') protected usuarioClienteRepositoryGetter: Getter<UsuarioClienteRepository>, @repository.getter('DireccionClienteRepository') protected direccionClienteRepositoryGetter: Getter<DireccionClienteRepository>,) {
     super(Cliente, dataSource);
     this.direccionCliente = this.createHasOneRepositoryFactoryFor('direccionCliente', direccionClienteRepositoryGetter);
     this.registerInclusionResolver('direccionCliente', this.direccionCliente.inclusionResolver);

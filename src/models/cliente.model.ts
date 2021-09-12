@@ -1,4 +1,4 @@
-import {Entity, model, property, hasOne} from '@loopback/repository';
+import {Entity, hasOne, model, property} from '@loopback/repository';
 import {UsuarioCliente} from './usuario-cliente.model';
 import {DireccionCliente} from './direccion-cliente.model';
 
