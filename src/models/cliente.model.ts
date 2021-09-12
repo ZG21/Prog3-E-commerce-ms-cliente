@@ -1,4 +1,6 @@
-import {Entity, model, property} from '@loopback/repository';
+import {Entity, model, property, hasOne} from '@loopback/repository';
+import {UsuarioCliente} from './usuario-cliente.model';
+import {DireccionCliente} from './direccion-cliente.model';
 
 @model()
 export class Cliente extends Entity {
@@ -39,6 +41,11 @@ export class Cliente extends Entity {
   })
   estado?: number;
 
+  @hasOne(() => UsuarioCliente, {keyTo: 'id_cliente'})
+  usuarioCliente: UsuarioCliente;
+
+  @hasOne(() => DireccionCliente, {keyTo: 'id_cliente'})
+  direccionCliente: DireccionCliente;
 
   constructor(data?: Partial<Cliente>) {
     super(data);

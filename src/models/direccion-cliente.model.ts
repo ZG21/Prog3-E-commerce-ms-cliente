@@ -21,6 +21,12 @@ export class DireccionCliente extends Entity {
   })
   numero: string;
 
+  @property({
+    type: 'string',
+    required: true,
+  })
+  id_cliente?: number;
+
 
   constructor(data?: Partial<DireccionCliente>) {
     super(data);
